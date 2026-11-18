@@ -230,6 +230,11 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
 #kindnessBook{width:min(900px,calc(100% - 16px));max-width:900px}#kindnessBook .panel{padding:0;max-height:94dvh}.kind-book-top{position:sticky;top:0;z-index:2;background:var(--surface);padding:20px;border-bottom:1px solid var(--border);border-radius:22px 22px 0 0}.kind-book-top h2{margin:0 0 4px;font-size:20px}#kindBookCount{margin:0}.kind-book-pages{position:sticky;bottom:0;background:var(--surface);padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}#kindBookList{padding:20px}.kind-book-item{padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--border)}.kind-book-item:last-child{border:0;margin-bottom:0}.kind-book-text{font-family:var(--font-quote);font-size:16px;line-height:1.85;overflow-wrap:anywhere;margin:12px 0}.kind-launch{border-left:4px solid #517368}.kind-launch p{margin:8px 0 14px}
 @media(max-width:540px){.kind-compose-grid{grid-template-columns:1fr;gap:8px}.kind-book-top,#kindBookList{padding:16px}.kind-book-top h2{font-size:18px}.kind-book-pages{padding:12px 16px}.kind-source-card{padding:14px}.kind-source-card .mind-actions button{flex:1 1 100%}.kind-topic-picker select{font-size:13px!important}}
 
+
+/* Compact birthdays and optional management tools */
+.bday-group{margin-top:14px}.bday-group:first-child{margin-top:4px}.bday-group h4{display:flex;align-items:center;gap:8px;font-size:13px;margin:0 0 4px}.bday-group h4 span{font-size:11px;color:var(--muted);font-weight:500}.bday-group .bday-none{font-size:12px;color:var(--muted);margin:8px 0}.bday.compact-bday{gap:10px;padding:6px 0;min-height:54px}.compact-bday .birth-name{min-height:28px;font-size:14px;line-height:1.4}.compact-bday .sub{font-size:11px}.compact-bday .badge{font-size:11px;white-space:nowrap}.compact-bday .btn{font-size:12px;padding:0 12px;min-height:40px}.bday-more{margin-top:6px}.bday-more summary{font-size:12px;font-weight:500;color:var(--primary);min-height:32px}.compact-utility{padding:14px 16px}.compact-utility>summary{font-size:14px;min-height:24px;line-height:24px}.utility-body{margin-top:16px}.mind-entry h3,.kind-launch h3{margin-bottom:14px!important}.teacher-daily{margin-bottom:18px}.teacher-daily .teacher-topic{margin-top:10px}.mind-note:empty,p[role=status]:empty{display:none}.mind-sub{margin-bottom:14px}.mind-section .mind-profile{margin-top:14px}#birthdayManager,#birthdayCloud{margin-bottom:12px}#birthWindow{margin-top:8px}#birthWindow button{padding:6px 8px;line-height:1.4}.kind-original summary{font-size:12px}#mindQuoteSource{font-size:11px}
+@media(max-width:460px){#birthdayHomeCard{padding:14px}.bday-group{margin-top:12px}.compact-bday .info{flex:1}.compact-bday .btn{padding:0 10px}.compact-utility{padding:12px 14px}.teacher-daily h2{font-size:18px}#birthWindow button{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -247,7 +252,7 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
 <div class="row between"><h2 id="teacherDailyHeading">📖 Sổ tay giáo viên</h2><span class="teacher-day" id="teacherDate"></span></div>
 <p class="teacher-topic" id="teacherDailyTopic"></p><div id="teacherDailyText" class="teacher-quote"></div>
 <div class="row between"><span class="muted small" id="teacherDailyPosition"></span><div class="row"><button class="btn" id="teacherCopy">Sao chép</button><button class="btn soft" id="teacherOpen">Mở sổ tay · 200 câu</button></div></div>
-<p class="teacher-rule">Mỗi ngày một lời khuyên theo giờ Việt Nam · Hết 200 câu sẽ quay lại câu đầu.</p>
+
 </section>
 
   <!-- HOME -->
@@ -256,18 +261,18 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
     <div class="hello" id="hello"></div>
     <p class="today" id="todayStr"></p>
     <div class="card notebook" id="birthdayHomeCard">
-      <div class="row between"><h3>🎂 Sinh nhật hôm nay & sắp tới</h3><button class="btn ghost small" data-go="people">Xem tất cả</button></div>
+      <div class="row between"><h3>🎂 Sinh nhật</h3><button class="btn ghost small" data-go="people">Danh sách</button></div>
       <div id="homeBdays"></div>
     </div>
 
     <div id="specialBox"></div>
-<div class="card kind-launch"><h3>💚 Gửi một điều tử tế</h3><p class="small muted">200 gợi ý theo 8 mục: động viên, an ủi, gia đình, bạn bè và những điều ấm áp trong đời sống.</p><button class="btn soft" data-kind-open>Mở 200 nội dung tử tế</button></div>
-<div class="card mind-entry"><h3>🌿 Chánh niệm với cuộc sống</h3><p class="small">Chọn cảm xúc, trở về với hơi thở và mang theo một việc nhỏ tử tế.</p><button class="btn" data-mind-open>✦ Lắng nghe mình · Tập thở · Gửi điều tử tế</button></div>
+<div class="card kind-launch"><h3>💚 Gửi một điều tử tế</h3><button class="btn soft" data-kind-open>Mở 200 nội dung tử tế</button></div>
+<div class="card mind-entry"><h3>🌿 Chánh niệm với cuộc sống</h3><button class="btn" data-mind-open>✦ Lắng nghe mình · Tập thở · Gửi điều tử tế</button></div>
 
 
     <div class="card">
       <h3>🎲 Bốc một lời chúc ngẫu nhiên</h3>
-      <p class="muted small" style="margin:0 0 12px">Chọn người nhận — app tự đổi cách xưng hô cho đúng.</p>
+      
       <div class="who" id="homeWho" role="group" aria-label="Người nhận"></div>
       <button class="btn primary big block" id="homeRandom">🎲 Bốc lời chúc</button>
     </div>
@@ -286,7 +291,7 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
   <!-- WISHES -->
   <section class="view" id="v-wish" aria-labelledby="h-wish">
     <h2 id="h-wish">Lời chúc</h2>
-    <p class="lead">Chọn người nhận, phong cách và dịp — hoặc bốc ngẫu nhiên.</p>
+    
     <div class="who" id="wishWho" role="group" aria-label="Người nhận"></div>
     <div class="seg" id="wishStyle" role="group" aria-label="Phong cách">
       <button data-v="all" aria-pressed="true">Tất cả</button>
@@ -306,8 +311,8 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
   <!-- ADVICE -->
   <section class="view" id="v-advice" aria-labelledby="h-adv">
     <h2 id="h-adv">Lời khuyên</h2>
-<div class="card mind-entry"><h3>🌿 Chánh niệm với cuộc sống</h3><p class="small">Chọn cảm xúc, trở về với hơi thở và mang theo một việc nhỏ tử tế.</p><button class="btn" data-mind-open>✦ Lắng nghe mình · Tập thở · Gửi điều tử tế</button></div>
-    <p class="lead">Động lực đầu giờ cho học sinh và bài học cuộc sống.</p>
+<div class="card mind-entry"><h3>🌿 Chánh niệm với cuộc sống</h3><button class="btn" data-mind-open>✦ Lắng nghe mình · Tập thở · Gửi điều tử tế</button></div>
+    
     <div class="seg" id="advCat" role="group" aria-label="Loại lời khuyên">
       <button data-v="dg" aria-pressed="true">☀️ Đầu giờ</button>
       <button data-v="bh" aria-pressed="false">🌿 Bài học</button>
@@ -315,7 +320,7 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
     </div>
     <div class="chips" id="advPart" role="group" aria-label="Chủ đề"></div>
     <div class="switch card" style="padding:4px 16px;margin-bottom:12px" id="advPronWrap">
-      <label for="advPron"><b>Xưng “thầy – em”</b><br><span class="muted small">Đổi “bạn” thành “em” khi đọc cho học sinh</span></label>
+      <label for="advPron"><b>Xưng “thầy – em”</b></label>
       <input type="checkbox" id="advPron" checked>
     </div>
     <div class="search"><label for="advQ" class="sr">Tìm lời khuyên</label><input id="advQ" type="search" placeholder="Tìm: tập trung, điểm kém, giấu dốt…" autocomplete="off"></div>
@@ -330,17 +335,22 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
   <!-- PEOPLE -->
   <section class="view" id="v-people" aria-labelledby="h-ppl">
     <h2 id="h-ppl">Người thân & ngày sinh</h2>
-    <p class="lead">Đến ngày, app hiện ngay ở trang chủ kèm lời chúc soạn sẵn.</p>
-<div class="card" id="birthdayManager">
-  <h3>📥 Nhập danh sách sinh nhật từ Excel</h3>
-  <p class="muted small">Mỗi dòng là một người: họ tên, ngày sinh, nhóm, ghi chú, thẻ. Dữ liệu được xem trước trước khi lưu.</p>
+    
+<div class="search"><label for="birthSearch" class="sr">Tìm theo tên, ghi chú hoặc thẻ</label><input id="birthSearch" type="search" placeholder="Tìm họ tên, ghi chú, thẻ…"></div>
+<p class="sr" id="birthSaveStatus" role="status"></p>
+
+    <div class="seg" id="birthWindow" role="group" aria-label="Khoảng sinh nhật"><button data-range="week" aria-pressed="true">Hôm nay &amp; 7 ngày tới</button><button data-range="all" aria-pressed="false">Toàn bộ danh sách</button></div>
+    <div class="chips" id="pplFilter" role="group" aria-label="Lọc theo quan hệ"></div>
+    <div id="pplList"></div>
+<details class="card compact-utility" id="birthdayManager"><summary>📥 Nhập và xuất Excel</summary><div class="utility-body">
+  
   <div class="row"><button class="btn soft" id="birthTemplate">⬇ Tải Excel mẫu</button><label class="btn primary" for="birthFile">📂 Chọn Excel</label><input class="sr" id="birthFile" type="file" accept=".xlsx,.xls,.csv"><button class="btn" id="birthExport">Xuất danh sách Excel</button></div>
-  <p class="muted small" id="birthImportStatus" role="status">Hỗ trợ .xlsx, .xls, .csv · Ngày/tháng/năm hoặc ngày/tháng · Tối đa 10.000 người.</p>
+  <p class="muted small" id="birthImportStatus" role="status"></p>
   <details><summary>Cách nhập và tránh trùng</summary><p class="small">Tải mẫu, thay các dòng minh họa bằng dữ liệu thật rồi chọn tệp. Giữ hàng tiêu đề. Nhóm: Người thân, Bạn bè, Đồng nghiệp, Học sinh; có thêm Cha mẹ, Người trên, Con cái. Nhiều thẻ ngăn cách bằng dấu phẩy. App ghép theo ID hoặc họ tên + ngày/tháng sinh; cùng tên và ngày sinh sẽ được xem là một người. Không nhập hai người khác nhau có cùng họ tên và ngày/tháng sinh. Tệp nhập không tự xóa người đang có. Sinh nhật 29/2 được nhắc vào 28/2 trong năm không nhuận.</p></details>
-</div>
-<div class="card" id="birthdayCloud">
-  <h3>☁️ Đồng bộ Google Sheets</h3>
-  <p class="muted small">Lưu trên máy để dùng hằng ngày, kết nối Sheet để dùng cùng danh sách trên các thiết bị.</p>
+</div></details>
+<details class="card compact-utility" id="birthdayCloud"><summary>☁️ Đồng bộ Google Sheets</summary><div class="utility-body">
+
+  
   <div class="field"><label for="cloudUrl">URL ứng dụng web Apps Script</label><input id="cloudUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></div>
   <div class="field"><label for="cloudKey">Khóa kết nối riêng</label><input id="cloudKey" type="password" autocomplete="off" placeholder="Tạo khóa ở phần hướng dẫn bên dưới"></div>
   <div class="row"><button class="btn" id="cloudSave">Lưu kết nối</button><button class="btn" id="cloudPull">↓ Lấy từ Sheet</button><button class="btn primary" id="cloudSync">↕ Đồng bộ hai chiều</button></div>
@@ -353,15 +363,10 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
     <label for="cloudScript" class="sr">Mã Google Apps Script</label><textarea id="cloudScript" class="code-area" readonly spellcheck="false" placeholder="Mã được tạo tại đây khi bạn bấm Tạo mã."></textarea>
     <p class="muted small">Tài liệu: <a href="https://developers.google.com/apps-script/guides/web" target="_blank" rel="noopener">Triển khai Apps Script</a> · <a href="https://docs.sheetjs.com/docs/getting-started/installation/standalone/" target="_blank" rel="noopener">Thư viện Excel SheetJS</a></p>
   </details>
-</div>
-<div class="search"><label for="birthSearch" class="sr">Tìm theo tên, ghi chú hoặc thẻ</label><input id="birthSearch" type="search" placeholder="Tìm họ tên, ghi chú, thẻ…"></div>
-<p class="small muted" id="birthSaveStatus" role="status"></p>
+</div></details>
 
-    <div class="chips" id="pplFilter" role="group" aria-label="Lọc theo quan hệ"></div>
-    <div id="pplList"></div>
-    <div class="card">
-      <h3>Nhắc ngày sinh cả khi không mở app</h3>
-      <p class="muted small" style="margin:0 0 12px">Tải tệp lịch .ics rồi mở trên điện thoại — lịch sẽ nhắc mỗi năm lúc 7 giờ sáng.</p>
+    <details class="card compact-utility"><summary>📅 Lịch nhắc và sao lưu</summary><div class="utility-body">
+      
       <div class="row">
         <button class="btn soft" id="btnIcs">📅 Xuất lịch nhắc (.ics)</button>
         <button class="btn" id="btnNotify">🔔 Bật thông báo</button>
@@ -373,17 +378,17 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
         <label class="btn" for="fileImport">⬆️ Khôi phục</label>
         <input type="file" id="fileImport" accept=".json,application/json" class="sr">
       </div>
-    </div>
+    </div></details>
   </section>
 
   <!-- SAVED -->
   <section class="view" id="v-saved" aria-labelledby="h-saved">
     <h2 id="h-saved">Đã lưu</h2>
-    <p class="lead">Những câu thầy đánh dấu ⭐ để dùng lại.</p>
+    
     <div id="savedList"></div>
   </section>
 
-  <p class="foot">Sổ tay của thầy Vũ Tiến Lực · Dữ liệu lưu trên máy; đồng bộ Google Sheets khi bạn chọn</p>
+  
 </main>
 
 <button class="fab" id="fabAdd">＋ Thêm người thân</button>
@@ -400,37 +405,37 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
 <dialog id="mindDialog" aria-labelledby="mindTitle" aria-describedby="mindIntro">
 <div class="mind-shell">
 <div class="mind-top"><div><div class="mind-kicker">Khoảng lặng dành cho bạn</div><h2 id="mindTitle">Chánh niệm với cuộc sống</h2></div><button id="mindClose" aria-label="Đóng phần tập thở">✕</button></div>
-<p class="mind-sub" id="mindIntro">Một chút lắng nghe mình. Một việc nhỏ để sống nhẹ nhàng hơn.</p>
+<p class="mind-sub" id="mindIntro">Một khoảng lặng cho chính mình.</p>
 <nav class="mind-journey" aria-label="Hành trình chánh niệm"><button data-mind-step="mindFeelings">1 · Lắng nghe mình</button><button data-mind-step="mindActionBox">2 · Một việc nhỏ</button><button data-mind-step="mindKindness">3 · Gửi điều tử tế</button><button id="mindExit" aria-label="Đóng phần chánh niệm">✕</button></nav>
 <section id="mindFeelings" class="mind-section" aria-labelledby="mindMoodTitle">
 <h3 id="mindMoodTitle" tabindex="-1">Lúc này bạn cảm thấy thế nào?</h3>
 <div class="mind-moods" id="mindMoods" role="group" aria-label="Chọn cảm xúc">
 <button data-mind-mood="stress" aria-pressed="false">🌧 Căng thẳng</button><button data-mind-mood="sad" aria-pressed="false">☁️ Buồn</button><button data-mind-mood="angry" aria-pressed="false">🔥 Tức giận</button><button data-mind-mood="focus" aria-pressed="false">🍃 Mất tập trung</button><button data-mind-mood="calm" aria-pressed="false">🌤 Bình an</button><button data-mind-mood="all" aria-pressed="true">🌿 Chưa muốn chọn</button>
-</div><p class="mind-note">Bạn có thể chọn hoặc bỏ qua. Cảm xúc chỉ dùng cho buổi này, không lưu hay đồng bộ.</p>
+</div>
 <div class="mind-profile" aria-live="polite"><span class="mind-kicker">Bài thực hành gợi ý</span><h3 id="mindPracticeTitle">Một khoảng lặng</h3><p id="mindPracticeText"></p><span class="mind-recommend" id="mindRecommend"></span></div>
 </section>
 <div class="mind-layout"><div class="mind-stage"><div class="mind-halo" aria-hidden="true"></div><div class="mind-orb" id="mindOrb" aria-hidden="true"></div><div class="mind-center"><div class="mind-phase" id="mindPhase" role="status">Sẵn sàng</div><div class="mind-time" id="mindTime" role="timer" aria-label="Thời gian còn lại">03:00</div><div class="mind-cycle" id="mindCycle"></div></div></div>
 <div><div class="mind-kicker" style="margin-bottom:10px">Thời gian dành cho mình</div><div class="mind-settings" role="group" aria-label="Thời gian tập thở"><button data-mind-duration="180" aria-pressed="true">3 phút</button><button data-mind-duration="300" aria-pressed="false">5 phút</button></div>
-<p class="mind-guide" id="mindGuide" aria-live="polite"></p><p class="mind-note">Vòng sáng chỉ gợi ý nhịp. Không cần nín thở hoặc cố hít sâu; hãy thở tự nhiên nếu thấy thoải mái hơn. Bấm Làm lại để đổi cảm xúc hoặc thời gian.</p>
+<p class="mind-guide" id="mindGuide" aria-live="polite"></p><p class="mind-note">Thở tự nhiên, không gắng sức.</p>
 <div class="mind-progress" role="progressbar" aria-label="Tiến độ buổi tập" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="mindProgress"><span id="mindBar"></span></div>
 <div class="mind-actions"><button id="mindStart">▶ Bắt đầu</button><button id="mindReset">↺ Làm lại</button></div>
-<div class="mind-audio"><button id="mindSound" aria-pressed="true">♫ Nhạc: bật</button><label for="mindVolume">Âm lượng</label><input id="mindVolume" type="range" min="0" max="100" value="35"></div><p class="mind-note" id="mindAudioStatus">Nhạc ambient nhẹ bắt đầu khi bạn bấm Bắt đầu.</p></div></div>
+<div class="mind-audio"><button id="mindSound" aria-pressed="true">♫ Nhạc: bật</button><label for="mindVolume">Âm lượng</label><input id="mindVolume" type="range" min="0" max="100" value="35"></div><p class="mind-note" id="mindAudioStatus"></p></div></div>
 <div class="mind-finished" id="mindBreathDone" hidden role="status"><b>Bạn đã dành một khoảng lặng cho mình.</b><p>Giữ lại một điều nhỏ để mang vào ngày hôm nay.</p><button data-mind-step="mindActionBox">Chọn một việc nhỏ ↓</button></div>
 <section class="mind-quote" id="mindActionBox" aria-labelledby="mindActionTitle">
-<div class="mind-kicker">Từ lời khuyên đến hành động</div><h3 id="mindActionTitle" tabindex="-1">Một điều để mang theo</h3><p class="mind-note" id="mindQuoteScope"></p><blockquote id="mindQuote"></blockquote>
+<div class="mind-kicker">Từ lời khuyên đến hành động</div><h3 id="mindActionTitle" tabindex="-1">Một điều để mang theo</h3><p class="sr" id="mindQuoteScope"></p><blockquote id="mindQuote"></blockquote>
 <div class="mind-action-suggestion"><span class="mind-kicker">Thử một việc rất nhỏ</span><p id="mindActionText"></p><button id="mindChooseAction">＋ Chọn việc này</button></div>
 <footer><span id="mindQuoteSource">Trích cachsong.txt · 300 lời khuyên</span><button id="mindNext">↗ Lời khuyên khác</button></footer>
-<p class="mind-note">Việc nhỏ là gợi ý thực hành do ứng dụng biên soạn từ lời khuyên.</p>
+
 <div class="mind-plan" id="mindPlan" hidden><div class="mind-kicker" id="mindPlanLabel">Việc tôi đã chọn</div><p id="mindPlanText"></p><div class="mind-actions"><button id="mindCompleteAction">✓ Đánh dấu đã làm</button><button id="mindClearAction">Bỏ lựa chọn</button></div><p class="mind-note" id="mindPlanStatus" role="status"></p></div>
-<p class="mind-note" id="mindPlanFeedback" role="status">Bạn có thể chọn một việc và làm khi phù hợp, không cần hoàn thành ngay.</p>
+<p class="mind-note" id="mindPlanFeedback" role="status"></p>
 </section>
-<section class="mind-kindness mind-section" id="mindKindness" aria-labelledby="mindKindnessTitle"><div class="mind-kicker">Một kết nối ấm áp</div><h3 id="mindKindnessTitle" tabindex="-1">Gửi một điều tử tế</h3><p class="mind-sub">Một lời hỏi thăm cũng có thể làm ngày của ai đó nhẹ hơn. Sinh nhật hôm nay và người thân được gợi ý trước.</p>
-<div class="kind-topic-picker"><label for="mindKindTopic">Chọn điều muốn gửi</label><select id="mindKindTopic"><option value="all">Tất cả 8 mục</option></select><div class="kind-source-card"><div class="mind-kicker" id="mindKindNumber"></div><p id="mindKindSource"></p><div class="mind-actions"><button id="mindKindNext">↗ Gợi ý khác cùng mục</button><button id="mindKindBook">Xem đủ 200 nội dung</button></div></div><p class="mind-note">Gợi ý gốc từ tute.txt. Khi soạn, app chuyển thành lời nhắn có thể chỉnh sửa; mục hành động có bản nháp đề nghị giúp đỡ hoặc lời quan tâm.</p></div>
+<section class="mind-kindness mind-section" id="mindKindness" aria-labelledby="mindKindnessTitle"><div class="mind-kicker">Một kết nối ấm áp</div><h3 id="mindKindnessTitle" tabindex="-1">Gửi một điều tử tế</h3>
+<div class="kind-topic-picker"><label for="mindKindTopic">Chọn điều muốn gửi</label><select id="mindKindTopic"><option value="all">Tất cả 8 mục</option></select><div class="kind-source-card"><div class="mind-kicker" id="mindKindNumber"></div><p id="mindKindSource"></p><div class="mind-actions"><button id="mindKindNext">↗ Gợi ý khác cùng mục</button><button id="mindKindBook">Xem đủ 200 nội dung</button></div></div></div>
 
 <label for="mindRecipientSearch" class="mind-note">Tìm người muốn gửi</label><input id="mindRecipientSearch" type="search" placeholder="Nhập tên người thân, bạn bè…" autocomplete="off">
 <div id="mindRecipients" class="mind-recipients" role="group" aria-label="Người nhận gợi ý"></div><p id="mindRecipientHint" class="mind-note" role="status"></p>
-<div class="mind-actions"><button id="mindComposeKindness">💚 Soạn lời nhắn này</button><button id="mindComposeBirthday" hidden>🎂 Lời chúc sinh nhật</button><button id="mindManagePeople">Mở danh sách người thân</button></div><p class="mind-note">Mở bản nháp để xem, sửa, sao chép hoặc chia sẻ. Ứng dụng không tự gửi tin.</p></section>
-<p class="mind-note" style="text-align:center;margin-bottom:0">Không cần làm thật nhiều. Một việc nhỏ vừa sức cũng đáng trân trọng.</p>
+<div class="mind-actions"><button id="mindComposeKindness">💚 Soạn lời nhắn này</button><button id="mindComposeBirthday" hidden>🎂 Lời chúc sinh nhật</button><button id="mindManagePeople">Mở danh sách người thân</button></div></section>
+
 </div></dialog>
 
 
@@ -446,14 +451,14 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
 </div></dialog>
 
 <dialog class="sheet" id="teacherBook" aria-labelledby="teacherBookTitle"><div class="panel teacher-panel">
-<div class="teacher-book-top"><div class="row between"><div><h2 id="teacherBookTitle">📖 Sổ tay giáo viên</h2><p class="small muted" style="margin:0">200 lời khuyên · 8 chủ đề · Nguồn: sotaygv.txt</p></div><button class="icon-btn" data-close aria-label="Đóng sổ tay giáo viên">✕</button></div>
+<div class="teacher-book-top"><div class="row between"><div><h2 id="teacherBookTitle">📖 Sổ tay giáo viên</h2><p class="small muted" style="margin:0">200 lời khuyên · 8 chủ đề</p></div><button class="icon-btn" data-close aria-label="Đóng sổ tay giáo viên">✕</button></div>
 <div class="teacher-filters"><div class="field"><label for="teacherTopic">Chủ đề</label><select id="teacherTopic"><option value="all">Tất cả chủ đề</option></select></div><div class="field"><label for="teacherSearch">Tìm trong sổ tay</label><input id="teacherSearch" type="search" placeholder="Bình tĩnh, học trò, lắng nghe…" autocomplete="off"></div></div>
 <div class="row between"><span id="teacherResultCount" class="small muted" role="status"></span><button class="btn ghost small" id="teacherBackToday">Về lời hôm nay</button></div></div>
 <div id="teacherBookList"></div>
 <div class="teacher-pagination"><button class="btn" id="teacherPrev">← Trước</button><span id="teacherPage" class="small" role="status"></span><button class="btn" id="teacherNext">Sau →</button></div>
 </div></dialog>
 
-<dialog id="kindnessBook" class="sheet" aria-labelledby="kindBookTitle"><div class="panel kind-book-panel"><div class="kind-book-top"><div class="row between"><div><h2 id="kindBookTitle">💚 Gửi một điều tử tế</h2><p class="small muted" style="margin:0">200 nội dung · 8 mục · Nguồn: tute.txt</p></div><button class="icon-btn" data-close aria-label="Đóng thư viện lời tử tế">✕</button></div><div class="kind-compose-grid"><div class="field"><label for="kindBookTopic">Chọn mục</label><select id="kindBookTopic"></select></div><div class="field"><label for="kindBookSearch">Tìm nội dung</label><input id="kindBookSearch" type="search" placeholder="Động viên, cảm ơn, gia đình…" autocomplete="off"></div></div><p id="kindBookCount" class="small muted" role="status"></p></div><div id="kindBookList"></div><div class="kind-book-pages"><button id="kindBookPrev" class="btn">← Trước</button><span id="kindBookPage" class="small" role="status"></span><button id="kindBookNext" class="btn">Sau →</button></div></div></dialog>
+<dialog id="kindnessBook" class="sheet" aria-labelledby="kindBookTitle"><div class="panel kind-book-panel"><div class="kind-book-top"><div class="row between"><div><h2 id="kindBookTitle">💚 Gửi một điều tử tế</h2><p class="small muted" style="margin:0">200 nội dung · 8 mục</p></div><button class="icon-btn" data-close aria-label="Đóng thư viện lời tử tế">✕</button></div><div class="kind-compose-grid"><div class="field"><label for="kindBookTopic">Chọn mục</label><select id="kindBookTopic"></select></div><div class="field"><label for="kindBookSearch">Tìm nội dung</label><input id="kindBookSearch" type="search" placeholder="Động viên, cảm ơn, gia đình…" autocomplete="off"></div></div><p id="kindBookCount" class="small muted" role="status"></p></div><div id="kindBookList"></div><div class="kind-book-pages"><button id="kindBookPrev" class="btn">← Trước</button><span id="kindBookPage" class="small" role="status"></span><button id="kindBookNext" class="btn">Sau →</button></div></div></dialog>
 
 <!-- Composer -->
 <dialog id="dlgCompose" class="sheet" aria-labelledby="cmpTitle">
@@ -467,7 +472,7 @@ textarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--b
       <button data-v="h" aria-pressed="false">😄 Hài hước</button>
     </div>
     <div class="switch" id="cmpBdayWrap"><label for="cmpBday"><b>Lời chúc sinh nhật</b></label><input type="checkbox" id="cmpBday"></div>
-<div id="cmpKindOptions" hidden><div class="kind-compose-grid"><div class="field"><label for="cmpKindTopic">Mục lời tử tế</label><select id="cmpKindTopic"></select></div><div class="field"><label for="cmpKindRecipient">Người nhận từ danh sách</label><select id="cmpKindRecipient"></select></div></div><p class="small muted">Đổi mục hoặc người nhận sẽ tạo lại bản nháp. Bạn có thể sửa toàn bộ lời nhắn bên dưới.</p><details class="kind-original"><summary id="cmpKindSourceTitle">Xem gợi ý gốc</summary><div class="small" id="cmpKindSource"></div></details><p class="small muted" id="cmpKindMeta"></p></div>
+<div id="cmpKindOptions" hidden><div class="kind-compose-grid"><div class="field"><label for="cmpKindTopic">Mục lời tử tế</label><select id="cmpKindTopic"></select></div><div class="field"><label for="cmpKindRecipient">Người nhận từ danh sách</label><select id="cmpKindRecipient"></select></div></div><details class="kind-original"><summary id="cmpKindSourceTitle">Xem gợi ý gốc</summary><div class="small" id="cmpKindSource"></div></details><p class="sr" id="cmpKindMeta"></p></div>
 
     <label for="cmpText" class="sr">Nội dung tin nhắn</label>
     <textarea id="cmpText"></textarea>
@@ -717,7 +722,7 @@ function go(view){
   $$('nav.tabs button').forEach(b=>{ if(b.dataset.go===view) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
   $('#fabAdd').classList.toggle('on', view==='people');
   if(view==='saved') renderSaved();
-  if(view==='people') renderPeople();
+  if(view==='people')setBirthWindow('week');
   window.scrollTo({top:0});
   history.replaceState(null,'','#'+view);
 }
@@ -969,32 +974,23 @@ function renderHome(){
   $('#hello').textContent = (h<11?'Chào buổi sáng':h<14?'Chào buổi trưa':h<18?'Chào buổi chiều':'Chào buổi tối') + `, thầy ${S.myName} 👋`;
   $('#todayStr').textContent = `${DOW[t.getDay()]}, ${t.getDate()}/${t.getMonth()+1}/${t.getFullYear()}`;
   const sp = SPECIAL.map(([d,m,n,e])=>({n,e,d,m,k:daysUntil({d,m})})).filter(x=>x.k<=10).sort((a,b)=>a.k-b.k || familyRank(a.p)-familyRank(b.p) || a.p.name.localeCompare(b.p.name,'vi'))[0];
-  $('#specialBox').innerHTML = sp ? `<div class="special"><span class="e" aria-hidden="true">${sp.e}</span><div><b>${sp.k===0?'Hôm nay là ':'Còn '+sp.k+' ngày nữa là '}${sp.n}</b><div class="small muted">${sp.d}/${sp.m} — chuẩn bị lời chúc gửi người thân nhé.</div></div></div>` : '';
+  $('#specialBox').innerHTML = sp ? `<div class="special"><span class="e" aria-hidden="true">${sp.e}</span><div><b>${sp.k===0?'Hôm nay là ':'Còn '+sp.k+' ngày nữa là '}${sp.n}</b><div class="small muted">${sp.d}/${sp.m}</div></div></div>` : '';
   // birthdays
   const list = people.map(p=>({p, k:daysUntil(p)})).sort((a,b)=>a.k-b.k || familyRank(a.p)-familyRank(b.p) || a.p.name.localeCompare(b.p.name,'vi'));
-  const todayL = list.filter(x=>x.k===0), soon = list.filter(x=>x.k>0 && x.k<=30).slice(0,3);
+  const todayL = list.filter(x=>x.k===0), soon = list.filter(x=>x.k>0 && x.k<=7);
   const box = $('#homeBdays');
   if(!people.length){
-    box.innerHTML = `<div class="empty" style="padding:16px 8px"><div class="e">🎂</div>Chưa có ai trong danh sách.<br><button class="btn soft" style="margin-top:12px" id="homeAdd">＋ Thêm người thân đầu tiên</button></div>`;
+    box.innerHTML = `<div class="empty" style="padding:12px 0">Chưa có danh sách.<br><button class="btn soft" style="margin-top:10px" id="homeAdd">＋ Thêm người thân</button></div>`;
     $('#homeAdd').onclick = ()=>openPerson();
   } else {
-    let html = '';
-    if(todayL.length) html += todayL.map(x=>bdayRow(x.p, x.k, true)).join('');
-    else html += `<p class="muted small" style="margin:4px 0 8px">Hôm nay chưa có ai sinh nhật.</p>`;
-    if(soon.length) html += `<p class="small" style="margin:12px 0 0;font-weight:600">Sắp tới</p>` + soon.map(x=>bdayRow(x.p, x.k, false)).join('');
-    box.innerHTML = html;
+    const group=(title,rows,now)=>`<section class="bday-group" data-bday-group="${now?'today':'week'}"><h4>${title}<span>${rows.length}</span></h4>${rows.length?rows.slice(0,3).map(x=>bdayRow(x.p,x.k,now)).join(''):`<p class="bday-none">Không có sinh nhật.</p>`}${rows.length>3?`<details class="bday-more"><summary>Xem thêm ${rows.length-3} người</summary>${rows.slice(3).map(x=>bdayRow(x.p,x.k,now)).join('')}</details>`:''}</section>`;
+    box.innerHTML = group('Hôm nay',todayL,true)+group('7 ngày tới',soon,false);
   }
   const dot = $('#navDot'); dot.hidden = !todayL.length; dot.textContent = todayL.length;
   drawDayQuote();
 }
-function bdayRow(p, k, now){
-  const age = ageOn(p);
-  return `<div class="bday rk-${p.rel}">
-    <div class="avatar" aria-hidden="true">${esc((p.name.trim().split(/\s+/).pop()||'?')[0].toUpperCase())}</div>
-    <div class="info"><div class="name"><button class="birth-name" data-wish="${p.id}">${esc(p.name)}</button></div>
-      <div class="sub">${RK[p.rel].label} · ${p.d}/${p.m}${age?` · tròn ${age} tuổi`:''}</div></div>
-    ${now ? `<button class="btn primary" data-wish="${p.id}">💌 Chúc</button>` : `<span class="badge">còn ${k} ngày</span>`}
-  </div>`;
+function bdayRow(p,k,now){
+  return `<div class="bday compact-bday rk-${p.rel}"><div class="info"><div class="name"><button class="birth-name" data-wish="${p.id}">${esc(p.name)}</button></div><div class="sub">${p.d}/${p.m} · ${RK[p.rel].label}</div></div>${now?`<button class="btn primary" data-wish="${p.id}">Chúc</button>`:`<span class="badge">${k===1?'Ngày mai':'Còn '+k+' ngày'}</span>`}</div>`;
 }
 document.addEventListener('click', e=>{
   const b = e.target.closest('[data-wish]'); if(!b) return;
@@ -1016,19 +1012,22 @@ $('#dayCopy').onclick = ()=>copy(strip($('#dayQuote').textContent));
 $('#dayPresent').onclick = ()=>{ const dg=ADV.filter(a=>a.c==='dg').map(a=>advText(a,true)); present(dg, dayIdx, 'Lời khuyên đầu giờ'); };
 
 /* ---------- PEOPLE ---------- */
-let pplFilter = 'all';
+let pplFilter = 'all',birthWindow='week';
+function setBirthWindow(value){birthWindow=value;$$('#birthWindow button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.range===value)));renderPeople();}
+$('#birthWindow').onclick=e=>{const b=e.target.closest('[data-range]');if(b)setBirthWindow(b.dataset.range);};
 function renderPplFilter(){
-  const cnt = k => people.filter(p=>p.rel===k).length;
-  $('#pplFilter').innerHTML = `<button class="chip" data-k="all" aria-pressed="${pplFilter==='all'}">Tất cả <span class="n">${people.length}</span></button>`
+  const visible=people.filter(p=>birthWindow==='all'||daysUntil(p)<=7);
+  const cnt = k => visible.filter(p=>p.rel===k).length;
+  $('#pplFilter').innerHTML = `<button class="chip" data-k="all" aria-pressed="${pplFilter==='all'}">Tất cả <span class="n">${visible.length}</span></button>`
     + Object.entries(RK).map(([k,r])=>`<button class="chip rk rk-${k}" data-k="${k}" aria-pressed="${pplFilter===k}">${r.e} ${r.label} <span class="n">${cnt(k)}</span></button>`).join('');
 }
 $('#pplFilter').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; pplFilter=b.dataset.k; renderPeople(); });
 function renderPeople(){
   renderPplFilter();
   const search=norm($('#birthSearch')?.value||'');
-  const list = people.filter(p=>(pplFilter==='all'||p.rel===pplFilter)&&norm([p.name,p.note,p.tags].join(' ')).includes(search)).map(p=>({p,k:daysUntil(p)})).sort((a,b)=>a.k-b.k || familyRank(a.p)-familyRank(b.p) || a.p.name.localeCompare(b.p.name,'vi'));
+  const list = people.filter(p=>(pplFilter==='all'||p.rel===pplFilter)&&norm([p.name,p.note,p.tags].join(' ')).includes(search)).map(p=>({p,k:daysUntil(p)})).filter(x=>birthWindow==='all'||x.k<=7).sort((a,b)=>a.k-b.k || familyRank(a.p)-familyRank(b.p) || a.p.name.localeCompare(b.p.name,'vi'));
   const box = $('#pplList');
-  if(!list.length){ box.innerHTML = `<div class="empty"><div class="e">📇</div>${people.length?'Không có ai trong nhóm này.':'Chưa có người thân nào.<br>Bấm <b>＋ Thêm người thân</b> để bắt đầu.'}</div>`; return; }
+  if(!list.length){ box.innerHTML = `<div class="empty"><div class="e">📇</div>${people.length?(birthWindow==='week'?'Không có sinh nhật phù hợp trong hôm nay và 7 ngày tới.':'Không tìm thấy người phù hợp.'):'Chưa có danh sách.'}</div>`; return; }
   box.innerHTML = list.map(({p,k})=>{
     const age = ageOn(p);
     return `<div class="card rk-${p.rel}" style="padding:12px 14px">
@@ -1314,7 +1313,7 @@ async function openCloudPreview(mode){
  }catch(e){cloudState(e.message);}finally{birthBusy=false;$('#cloudPull').disabled=false;$('#cloudSync').disabled=false;}
 }
 $('#cloudPull').onclick=()=>openCloudPreview('pull');$('#cloudSync').onclick=()=>openCloudPreview('sync');
-$('#birthSaveStatus').textContent=people.length?`Đang có ${people.length} người đã lưu trên trình duyệt này.`:'Danh sách sẽ tự lưu trên trình duyệt này sau khi nhập.';
+$('#birthSaveStatus').textContent='';
 
 /* User-provided source suggestions and editable recipient-specific drafts. */
 const KINDNESS_TOPICS=[{"title": "Lời động viên gửi người đang mệt mỏi, chật vật hoặc vấp ngã", "short": "Động viên khi mệt mỏi, vấp ngã"}, {"title": "Lời an ủi dịu dàng gửi người đang đau lòng, mất mát hoặc cô đơn", "short": "An ủi khi đau lòng, cô đơn"}, {"title": "Lời chúc bình an & nhắc nhở yêu thương gửi đến gia đình, cha mẹ, người thân", "short": "Gia đình, cha mẹ, người thân"}, {"title": "Điều tử tế gửi bạn bè, đồng nghiệp & người đang cần ghi nhận", "short": "Bạn bè, đồng nghiệp và ghi nhận"}, {"title": "Hành động tử tế nhỏ bé có thể trao ngay cho hàng xóm và người lạ quanh ta", "short": "Hành động cho hàng xóm, người lạ"}, {"title": "Lời nói hàn gắn, xin lỗi, cảm ơn & buông bỏ giận hờn", "short": "Hàn gắn, xin lỗi và cảm ơn"}, {"title": "Lời nhắc tích cực giúp một người trân trọng hiện tại & biết đủ", "short": "Trân trọng hiện tại và biết đủ"}, {"title": "Thông điệp tử tế giúp một người tự thương lấy mình & giữ ngọn đèn niềm tin", "short": "Tự thương mình và giữ niềm tin"}];
@@ -1429,7 +1428,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleTe
 scheduleTeacherDay();
 
 /* ---------- init ---------- */
-$('#subtitle').textContent = `${WISH.length} lời chúc · ${ADV.length} lời khuyên · ${TEACHER_BOOK.length} lời khuyên giáo viên`;
+$('#subtitle').textContent = 'Lời chúc · Sổ tay · Chánh niệm';
 renderHome(); renderWishes(); renderAdvice(); notifyToday(false);
 const start = location.hash.slice(1); if(['wish','advice','people','saved'].includes(start)) go(start);
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) renderHome(); });
@@ -1461,13 +1460,13 @@ function savePlan(next){
 window.SoTayMindPlan=Object.freeze({export(){return plan?{...plan}:null;},restore(p){if(!validPlan(p))throw Error('Việc nhỏ trong bản sao lưu không đúng định dạng.');return savePlan({quoteIndex:p.quoteIndex,day:p.day,status:p.status});}});
 function renderPlan(){
  el('mindPlan').hidden=!plan;
- if(plan){const isToday=plan.day===today();el('mindPlanLabel').textContent=isToday?'Việc tôi chọn hôm nay':'Việc đã chọn ngày '+plan.day.split('-').reverse().join('/');el('mindPlanText').textContent=actions[plan.quoteIndex];el('mindPlan').classList.toggle('done',plan.status==='done');el('mindCompleteAction').textContent=plan.status==='done'?'↩ Đánh dấu chưa làm':'✓ Đánh dấu đã làm';el('mindPlanStatus').textContent=plan.status==='done'?'Đã làm. Cảm ơn bạn đã dành chỗ cho một điều nhỏ tử tế.':'Đã lưu trên máy. Hãy làm khi phù hợp; bạn không cần hoàn thành ngay.';}
+ if(plan){const isToday=plan.day===today();el('mindPlanLabel').textContent=isToday?'Việc tôi chọn hôm nay':'Việc đã chọn ngày '+plan.day.split('-').reverse().join('/');el('mindPlanText').textContent=actions[plan.quoteIndex];el('mindPlan').classList.toggle('done',plan.status==='done');el('mindCompleteAction').textContent=plan.status==='done'?'↩ Đánh dấu chưa làm':'✓ Đánh dấu đã làm';el('mindPlanStatus').textContent=plan.status==='done'?'Đã làm':'Đã lưu';}
  const same=plan&&plan.quoteIndex===lastQuote&&plan.day===today();el('mindChooseAction').disabled=!!same;el('mindChooseAction').textContent=same?(plan.status==='done'?'✓ Việc này đã làm':'✓ Đã chọn việc này'):plan?'Đổi sang việc này':'＋ Chọn việc này';
 }
 function nextQuote(){
  const ids=profiles[mood].ids,pool=ids?ids.map(n=>n-1):quotes.map((_,i)=>i);
  if(!bags[mood]?.length){const bag=[...pool];for(let i=bag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]];}if(bag.at(-1)===lastQuote&&bag.length>1)[bag[0],bag[bag.length-1]]=[bag.at(-1),bag[0]];bags[mood]=bag;}
- lastQuote=bags[mood].pop();el('mindQuote').textContent=quotes[lastQuote];el('mindActionText').textContent=actions[lastQuote];el('mindQuoteSource').textContent='cachsong.txt · Câu '+(lastQuote+1)+'/300';el('mindQuoteScope').textContent=ids?profiles[mood].label+' · Chọn ngẫu nhiên từ '+pool.length+' lời khuyên phù hợp.':'Chọn ngẫu nhiên từ toàn bộ 300 lời khuyên.';renderPlan();
+ lastQuote=bags[mood].pop();el('mindQuote').textContent=quotes[lastQuote];el('mindActionText').textContent=actions[lastQuote];el('mindQuoteSource').textContent='Lời khuyên '+(lastQuote+1)+'/300';el('mindQuoteScope').textContent=ids?profiles[mood].label+' · Chọn ngẫu nhiên từ '+pool.length+' lời khuyên phù hợp.':'Chọn ngẫu nhiên từ toàn bộ 300 lời khuyên.';renderPlan();
 }
 function timeNow(){return elapsed+(running?(performance.now()-started)/1000:0);}
 function setText(id,text){if(el(id).textContent!==text)el(id).textContent=text;}
@@ -1490,7 +1489,7 @@ async function sound(){
  if(!ctx){ctx=new AC();master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);
  // A spacious, quiet pentatonic pad, generated locally with slow modulation.
  [130.81,196,261.63,329.63,392].forEach((freq,i)=>{const osc=ctx.createOscillator(), gain=ctx.createGain(), lfo=ctx.createOscillator(), depth=ctx.createGain();osc.type='sine';osc.frequency.value=freq;osc.detune.value=i%2?3:-3;gain.gain.value=.1;lfo.frequency.value=.045+i*.013;depth.gain.value=.025;lfo.connect(depth);depth.connect(gain.gain);osc.connect(gain);gain.connect(master);osc.start();lfo.start();nodes.push(osc,lfo);});}
- const active=ctx;await active.resume();if(ticket!==audioTicket||ctx!==active)return;volume();el('mindAudioStatus').textContent='Nhạc ambient không lời · phát trực tiếp trên thiết bị.';
+ const active=ctx;await active.resume();if(ticket!==audioTicket||ctx!==active)return;volume();el('mindAudioStatus').textContent='Nhạc đang phát.';
  }catch(e){el('mindAudioStatus').textContent='Chưa phát được nhạc. Bạn vẫn có thể tập thở; thử bật nhạc lại.';}
 }
 
@@ -1503,7 +1502,7 @@ function tick(){
  const bucket=Math.floor(t/30);if(bucket>quoteBucket){quoteBucket=bucket;nextQuote();}paint(t);frame=requestAnimationFrame(tick);
 }
 function showProfile(key){
- mood=key;duration=profiles[mood].duration;reset();const p=profiles[mood];el('mindPracticeTitle').textContent=p.name;el('mindPracticeText').textContent=p.text;el('mindRecommend').textContent='Gợi ý '+p.duration/60+' phút · Có thể đổi sang 3 hoặc 5 phút ở dưới.';
+ mood=key;duration=profiles[mood].duration;reset();const p=profiles[mood];el('mindPracticeTitle').textContent=p.name;el('mindPracticeText').textContent=p.text;el('mindRecommend').textContent='Gợi ý '+p.duration/60+' phút';
  document.querySelectorAll('[data-mind-mood]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mindMood===mood)));
  document.querySelectorAll('[data-mind-duration]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.mindDuration)===duration)));nextQuote();
 }
